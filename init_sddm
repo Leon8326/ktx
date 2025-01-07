@@ -23,6 +23,6 @@ pulseaudio --start &
 
 # Step 6: Start SDDM (login manager)
 echo "Starting SDDM..."
-sddm &
+dbus-launch "sddm" &
 
 # End of init_sddm script
