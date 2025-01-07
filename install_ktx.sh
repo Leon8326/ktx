@@ -18,17 +18,17 @@ pkg install -y proot-distro
 echo "Installing Debian distribution..."
 proot-distro install debian
 
-# Step 4: Login to the Debian environment and install Plasma desktop, Plasma mobile and init_sddm.
+# Step 4: Login to the Debian environment and install Plasma desktop, Plasma mobile and init_plasma.
 echo "Installing KDE Plasma Desktop and Plasma Mobile in Debian..."
 proot-distro login debian -- apt update -y && apt upgrade -y
 proot-distro login debian -- apt install -y plasma-desktop plasma-mobile git
 proot-distro login debian -- git clone https://github.com/leon8326/ktx.git ~/ktx-repo
-proot-distro login debian -- cd ~/ktx-repo && chmod -x init_sddm
-proot-distro login debian -- cp ~/ktx-repo/init_sddm /bin/init_sddm
+proot-distro login debian -- cd ~/ktx-repo && chmod -x init_plasma
+proot-distro login debian -- cp ~/ktx-repo/init_plasma /bin/init_plasma
 
 # Step 5: Clone the ktx repository from GitHub
 echo "Cloning the ktx repository from GitHub..."
-git clone https://github.com/leon8326/ktx.git /data/data/com.termux/files/home/ktx_repo
+git clone https://github.com/leon8326/ktx /data/data/com.termux/files/home/ktx_repo
 
 # Check if the repository was cloned successfully
 if [ ! -d "/data/data/com.termux/files/home/ktx_repo" ]; then
@@ -40,11 +40,11 @@ fi
 cd /data/data/com.termux/files/home/ktx_repo
 
 # Step 6: Make the ktx and init_sddm scripts executable
-echo "Setting executable permissions for ktx and init_sddm scripts..."
-chmod +x ktx init_sddm
+echo "Setting executable permissions for ktx and init_plasma scripts..."
+chmod +x ktx init_plasma
 
 # Step 7: Move the scripts to a directory in the PATH (e.g., /data/data/com.termux/files/usr/bin)
-echo "Moving ktx and init_sddm scripts to /data/data/com.termux/files/usr/bin for easier access..."
+echo "Moving ktx and init_plasma scripts to /data/data/com.termux/files/usr/bin for easier access..."
 mv ktx init_sddm /data/data/com.termux/files/usr/bin/
 
 # Step 8: Verify the installation
@@ -58,7 +58,7 @@ echo "Installation complete! You can now run the ktx script by typing 'ktx' in T
 # Optional: Show a usage message
 echo "To use ktx, run 'ktx' in Termux. Make sure you have Termux X11 installed and running on your device."
 echo "You can log into your Debian environment using 'proot-distro login debian'."
-echo "To start Plasma Desktop, run 'startplasma' within Debian."
+echo "To start Plasma Desktop, run 'startplasma-x11' within Debian."
 # Optional: Run KTX for the first time.
 echo ""
 echo "KTX will run for the first time in 10 seconds."
