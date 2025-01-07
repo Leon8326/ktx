@@ -8,7 +8,7 @@ echo "Installing KDE Plasma & dependencies..."
 # Step 1: Update Termux and install required packages
 pkg update -y
 pkg upgrade -y
-pkg install -y git proot-distro wget pulseaudio termux-x11
+pkg install -y git proot-distro wget pulseaudio tigervnc
 
 # Step 2: Install proot-distro and setup Debian distribution
 echo "Installing proot-distro..."
