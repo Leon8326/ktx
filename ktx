@@ -16,7 +16,7 @@ pkg install -y proot wget git termux-x11 pulseaudio
 
 # Step 3: Start VNC X11 server in the background
 echo "Starting VNC X11 server..."
-termux-x11
+termux-x11 :1
 
 # Step 4: Start PulseAudio in the background
 echo "Starting PulseAudio..."
@@ -31,7 +31,7 @@ echo "Make sure the Termux X11 app is running on your device. It should automati
 sleep 2
 
 # Step 7: Launch the Debian chroot environment and execute init_sddm inside it
-echo "Starting Debian environment and executing init_sddm script..."
-proot-distro login debian --shared-tmp -- export DISPLAY=:0 && dbus-launch "startplasma-x11"
+echo "Starting Debian environment and executing init_plasma script..."
+proot-distro login debian --shared-tmp -- init_plasma
 
 # End of script
