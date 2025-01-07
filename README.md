@@ -8,5 +8,9 @@ init_sddm: Initializes SDDM.
 
 install_ktx.sh: KTX Installation Script.
 # Installation
-Run ```curl -sSL https://raw.githubusercontent.com/leon8326/ktx/main/install_ktx.sh | bash
+Run 
+
+```
+curl -sSL https://raw.githubusercontent.com/leon8326/ktx/main/install_ktx.sh | bash
+
 on termux to install.
