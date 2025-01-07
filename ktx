@@ -32,6 +32,6 @@ sleep 2
 
 # Step 7: Launch the Debian chroot environment and execute init_sddm inside it
 echo "Starting Debian environment and executing init_sddm script..."
-proot-distro login debian -- init_sddm
+proot-distro login debian --shared-tmp -- init_sddm
 
 # End of script
