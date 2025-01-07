@@ -1,28 +1,57 @@
 #!/bin/bash
 
-# This script will run inside the Debian chroot to set up the X11 environment and Plasma Desktop.
+# Script to set up and start the X11 environment and KDE Plasma Desktop inside the Debian chroot.
 
-echo "Setting up the X11 environment, installing PulseAudio, and configuring Plasma Desktop..."
+echo "Configuring X11 environment, PulseAudio, and Plasma Desktop..."
 
-# Step 1: Update package list and upgrade packages
+# Step 1: Update and upgrade packages
+echo "Updating package list and upgrading packages..."
 apt update && apt upgrade -y
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to update and upgrade packages."
+    exit 1
+fi
 
-# Step 2: Install required packages including PulseAudio and SDDM
-apt install -y x11-xserver-utils xorg openbox sddm pulseaudio
+# Step 2: Install required packages
+echo "Installing required packages..."
+apt install -y x11-xserver-utils xorg openbox sddm pulseaudio dbus
+if [ $? -ne 0 ]; then
+    echo "Error: Failed to install required packages."
+    exit 1
+fi
 
-# Step 3: Set environment for display (use the X11 display server from Termux)
+# Step 3: Set DISPLAY environment variable
 export DISPLAY=:0
+echo "DISPLAY set to $DISPLAY"
 
-# Step 4: Start the X server (this assumes Termux X11 server is running)
-echo "Starting X server..."
-xinit &
+# Step 4: Ensure X11 server is running
+echo "Checking if X11 server is running..."
+if ! pgrep -f "Xorg" > /dev/null; then
+    echo "Error: X11 server is not running. Please start Termux X11 server before running this script."
+    exit 1
+fi
 
 # Step 5: Start PulseAudio
 echo "Starting PulseAudio..."
-pulseaudio --start &
+pulseaudio --start
+if [ $? -ne 0 ]; then
+    echo "Warning: PulseAudio failed to start. Sound may not work."
+fi
 
-# Step 6: Start Plasma Desktop
+# Step 6: Start DBus if not running
+if ! pgrep -x "dbus-daemon" > /dev/null; then
+    echo "Starting DBus..."
+    dbus-launch --exit-with-session
+fi
+
+# Step 7: Start Plasma Desktop
 echo "Starting Plasma Desktop..."
-dbus-launch "startplasma-x11" &
+nohup startplasma-x11 > /dev/null 2>&1 &
+if [ $? -eq 0 ]; then
+    echo "Plasma Desktop started successfully!"
+else
+    echo "Error: Failed to start Plasma Desktop."
+    exit 1
+fi
 
-# End of init_plasma script
+echo "Setup complete. Enjoy KDE Plasma on Termux!"
