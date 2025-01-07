@@ -12,5 +12,6 @@ Run
 
 ```
 curl -sSL https://raw.githubusercontent.com/leon8326/ktx/main/install_ktx.sh | bash
+```
 
 on termux to install.
