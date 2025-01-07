@@ -1,5 +1,6 @@
 # KTX (KDE Termux)
 A simplified installation of plasma on termux.
+
 Install KDE Plasma Desktop and Mobile on termux.
 # Scripts
 ktx: Sets up and runs init_sddm.
