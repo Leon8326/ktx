@@ -1,8 +1,8 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-# This script sets up the environment to run SDDM inside Debian, starts the Termux X11 server, and opens the X11 app.
+# This script sets up the environment to run Plasma inside Debian, starts the Termux X11 server, and opens the X11 app.
 
-echo "Setting up environment for SDDM inside Debian, starting Termux X11 server, and launching the X11 app..."
+echo "Setting up environment for Plasma inside Debian, starting Termux X11 server, and launching the X11 app..."
 
 # Step 1: Kill any running instances of Termux X11 server or PulseAudio
 echo "Killing any running instances of termux-x11 and pulseaudio..."
@@ -15,7 +15,7 @@ pkg upgrade -y
 pkg install -y proot wget git termux-x11 pulseaudio
 
 # Step 3: Start VNC X11 server in the background
-echo "Starting VNC X11 server..."
+echo "Starting Termux X11 server..."
 termux-x11 :1
 
 # Step 4: Start PulseAudio in the background
