@@ -56,3 +56,7 @@ echo "Installation complete! You can now run the ktx script by typing 'ktx' in T
 echo "To use ktx, run 'ktx' in Termux. Make sure you have Termux X11 installed and running on your device."
 echo "You can log into your Debian environment using 'proot-distro login debian'."
 echo "To start Plasma Desktop, run 'startplasma' within Debian."
+echo "KTX will run for the first time in 10 seconds."
+echo "This will install required dependencies." 
+sleep 10
+ktx
