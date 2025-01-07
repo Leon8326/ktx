@@ -36,16 +36,13 @@ if [ ! -d "/data/data/com.termux/files/home/ktx_repo" ]; then
     exit 1
 fi
 
-# Navigate to the cloned repository
-cd /data/data/com.termux/files/home/ktx_repo
-
 # Step 6: Make the ktx and init_sddm scripts executable
 echo "Setting executable permissions for ktx and init_plasma scripts..."
-chmod +x ktx init_plasma
+chmod +x ~/ktx-repo/ktx ~/ktx-repo/init_plasma
 
 # Step 7: Move the scripts to a directory in the PATH (e.g., /data/data/com.termux/files/usr/bin)
 echo "Moving ktx and init_plasma scripts to /data/data/com.termux/files/usr/bin for easier access..."
-mv ktx init_sddm /data/data/com.termux/files/usr/bin/
+mv ~/ktx-repo/ktx ~/ktx-repo/init_sddm /data/data/com.termux/files/usr/bin/
 
 # Step 8: Verify the installation
 if [ ! -f "/data/data/com.termux/files/usr/bin/ktx" ]; then
