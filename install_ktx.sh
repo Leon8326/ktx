@@ -3,7 +3,7 @@
 # This script installs the full ktx package, init_sddm from GitHub, proot-distro with Debian,
 # and installs plasma-desktop and plasma-mobile on Debian.
 
-echo "Installing dependencies..."
+echo "Installing KDE Plasma & dependencies..."
 
 # Step 1: Update Termux and install required packages
 pkg update -y
