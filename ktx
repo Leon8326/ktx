@@ -1,37 +1,48 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
-# This script sets up the environment to run Plasma inside Debian, starts the Termux X11 server, and opens the X11 app.
+# Script to set up and run KDE Plasma inside Debian on Termux.
 
-echo "Setting up environment for Plasma inside Debian, starting Termux X11 server, and launching the X11 app..."
+echo "Setting up environment for KDE Plasma inside Debian..."
 
-# Step 1: Kill any running instances of Termux X11 server or PulseAudio
-echo "Killing any running instances of termux-x11 and pulseaudio..."
-killall tigervnc
-killall pulseaudio
+# Step 1: Kill any running instances of Termux X11 and PulseAudio
+echo "Stopping any running instances of Termux X11 and PulseAudio..."
+pkill -f termux-x11 || echo "No Termux X11 instances running."
+pkill -f pulseaudio || echo "No PulseAudio instances running."
 
-# Step 2: Install dependencies in Termux (like proot, termux-x11, and pulseaudio)
-pkg update -y
-pkg upgrade -y
+# Step 2: Install necessary dependencies
+echo "Updating packages and installing required dependencies..."
+pkg update -y && pkg upgrade -y
 pkg install -y proot wget git termux-x11 pulseaudio
 
-# Step 3: Start VNC X11 server in the background
+# Step 3: Start Termux X11 server
 echo "Starting Termux X11 server..."
-termux-x11 :1
+termux-x11 :1 &
+sleep 2
 
-# Step 4: Start PulseAudio in the background
+# Step 4: Start PulseAudio
 echo "Starting PulseAudio..."
 pulseaudio --start &
 
-# Step 5: Open the Termux X11 app using the `am start` command
-echo "Opening Termux X11 app..."
+# Step 5: Open Termux X11 app
+echo "Launching Termux X11 app..."
 am start --user 0 -n com.termux.x11/com.termux.x11.MainActivity > /dev/null 2>&1
+if [ $? -ne 0 ]; then
+    echo "Failed to launch Termux X11 app. Please ensure it's installed and try again."
+    exit 1
+fi
 
-# Step 6: Ensure the Termux X11 app is running
-echo "Make sure the Termux X11 app is running on your device. It should automatically launch."
-sleep 2
+# Step 6: Inform the user about the X11 app
+echo "Make sure the Termux X11 app is running on your device."
 
-# Step 7: Launch the Debian chroot environment and execute init_sddm inside it
-echo "Starting Debian environment and executing init_plasma script..."
-proot-distro login debian --shared-tmp -- init_plasma
+# Step 7: Launch the Debian chroot environment and run Plasma initialization
+echo "Logging into the Debian environment to start Plasma..."
+proot-distro login debian --shared-tmp -- bash -c "init_plasma"
+
+if [ $? -eq 0 ]; then
+    echo "KDE Plasma environment setup successfully!"
+else
+    echo "Failed to set up the KDE Plasma environment. Please check the logs for more details."
+    exit 1
+fi
 
 # End of script
