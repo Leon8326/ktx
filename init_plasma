@@ -21,8 +21,8 @@ xinit &
 echo "Starting PulseAudio..."
 pulseaudio --start &
 
-# Step 6: Start SDDM (login manager)
-echo "Starting SDDM..."
+# Step 6: Start Plasma Desktop
+echo "Starting Plasma Desktop..."
 dbus-launch "startplasma-x11" &
 
-# End of init_sddm script
+# End of init_plasma script
