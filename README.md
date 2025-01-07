@@ -16,3 +16,11 @@ curl -sSL https://raw.githubusercontent.com/leon8326/ktx/main/install_ktx.sh | b
 ```
 
 on termux to install.
+# Update KTX
+Run
+
+```
+update_ktx
+```
+
+after installation to update ktx.
