@@ -1,0 +1,3 @@
+#!/data/data/com.termux/files/usr/bin/bash
+rm -rf ~/ktx-repo ~/bin/ktx ~/bin/init_plasma ~/bin/update_ktx
+curl -sSL https://raw.githubusercontent.com/leon8326/ktx/main/install_ktx.sh | bash
