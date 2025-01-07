@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# This script will run inside the Debian chroot to set up the X11 environment and SDDM.
+# This script will run inside the Debian chroot to set up the X11 environment and Plasma Desktop.
 
-echo "Setting up the X11 environment, installing PulseAudio, and configuring SDDM..."
+echo "Setting up the X11 environment, installing PulseAudio, and configuring Plasma Desktop..."
 
 # Step 1: Update package list and upgrade packages
 apt update && apt upgrade -y
@@ -23,6 +23,6 @@ pulseaudio --start &
 
 # Step 6: Start SDDM (login manager)
 echo "Starting SDDM..."
-dbus-launch "sddm" &
+dbus-launch "startplasma-x11" &
 
 # End of init_sddm script
