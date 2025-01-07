@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# This script will run inside the Debian chroot to set up the X11 environment and SDDM.
+
+echo "Setting up the X11 environment, installing PulseAudio, and configuring SDDM..."
+
+# Step 1: Update package list and upgrade packages
+apt update && apt upgrade -y
+
+# Step 2: Install required packages including PulseAudio and SDDM
+apt install -y x11-xserver-utils xorg openbox sddm pulseaudio
+
+# Step 3: Set environment for display (use the X11 display server from Termux)
+export DISPLAY=:0
+
+# Step 4: Start the X server (this assumes Termux X11 server is running)
+echo "Starting X server..."
+xinit &
+
+# Step 5: Start PulseAudio
+echo "Starting PulseAudio..."
+pulseaudio --start &
+
+# Step 6: Start SDDM (login manager)
+echo "Starting SDDM..."
+sddm &
+
+# End of init_sddm script
